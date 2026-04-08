@@ -31,3 +31,12 @@ dist/
 .idea/
 .DS_Store
 Thumbs.db
+
+tasks/task_1_easy/*
+!tasks/task_1_easy/.gitkeep
+tasks/task_2_medium/*
+!tasks/task_2_medium/.gitkeep
+tasks/task_3_hard/*
+!tasks/task_3_hard/.gitkeep
+tasks/**/.git
+
