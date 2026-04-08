@@ -1,6 +1,8 @@
 #!/bin/bash
+git config --global user.email "bot@openenv.com"
+git config --global user.name "OpenEnv Bot"
 
-Task 1: Easy
+#Task 1: Easy
 cd tasks/task_1_easy
 git init
 git branch -M main
@@ -19,7 +21,7 @@ git commit -am "Developer B changes"
 git merge feature-a --no-edit || true
 cd ../..
 
-Task 2: Medium
+#Task 2: Medium
 cd tasks/task_2_medium
 git init
 git branch -M main
@@ -40,7 +42,7 @@ git commit -am "Added run_more using old signature"
 git merge feature-a --no-edit || true
 cd ../..
 
-Task 3: Hard
+#Task 3: Hard
 cd tasks/task_3_hard
 git init
 git branch -M main
