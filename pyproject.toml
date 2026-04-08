@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "automergeenv"
+version = "0.1.0"
+description = "A Semantic Git Conflict Resolver environment for OpenEnv."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic",
+    "pytest",
+    "openenv-core"
+]
+
+[project.scripts]
+server = "server.app:main"
