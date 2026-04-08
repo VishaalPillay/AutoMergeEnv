@@ -8,6 +8,8 @@ RUN pip install --no-cache-dir fastapi uvicorn pydantic pytest openai httpx
 
 COPY . /app
 
+RUN chmod +x setup_tasks.sh && ./setup_tasks.sh
+
 EXPOSE 7860
 
 CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "7860"]
