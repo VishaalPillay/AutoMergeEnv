@@ -1,10 +1,4 @@
 name: AutoMergeEnv
 version: 0.1.0
 entrypoint: environment.env:AutoMergeEnv
-tasks:
-  - id: task_1_easy
-    grader: environment.graders:calculate_reward
-  - id: task_2_medium
-    grader: environment.graders:calculate_reward
-  - id: task_3_hard
-    grader: environment.graders:calculate_reward
+tasks: tasks.json

@@ -1,0 +1,17 @@
+[
+    {
+      "id": "task_1_easy",
+      "task_id": "task_1_easy",
+      "grader": "environment.graders:calculate_reward"
+    },
+    {
+      "id": "task_2_medium",
+      "task_id": "task_2_medium",
+      "grader": "environment.graders:calculate_reward"
+    },
+    {
+      "id": "task_3_hard",
+      "task_id": "task_3_hard",
+      "grader": "environment.graders:calculate_reward"
+    }
+  ]
