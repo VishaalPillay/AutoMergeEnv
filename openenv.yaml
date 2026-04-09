@@ -1,4 +1,19 @@
 name: AutoMergeEnv
 version: 0.1.0
 entrypoint: environment.env:AutoMergeEnv
-tasks: tasks.json
+tasks:
+  - id: "task_1_easy"
+    name: "Task 1 Easy"
+    description: "Resolve an easy git merge conflict in the utils file."
+    difficulty: "easy"
+    grader: "environment.graders:calculate_reward"
+  - id: "task_2_medium"
+    name: "Task 2 Medium"
+    description: "Resolve a medium git merge conflict involving application logic."
+    difficulty: "medium"
+    grader: "environment.graders:calculate_reward"
+  - id: "task_3_hard"
+    name: "Task 3 Hard"
+    description: "Resolve a hard git merge conflict involving database schemas."
+    difficulty: "hard"
+    grader: "environment.graders:calculate_reward"
