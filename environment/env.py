@@ -100,8 +100,10 @@ class AutoMergeEnv:
             stderr = str(e)
             action_failed = True
 
+        # Calculate reward and apply a secondary bulletproof clamp for the OpenEnv validator
         reward_val = calculate_reward(self.current_repo, action_failed=action_failed)
-        reward = AutoMergeReward(value=reward_val)
+        safe_reward = max(0.01, min(0.99, float(reward_val)))
+        reward = AutoMergeReward(value=safe_reward)
         
         obs = await self.state()
         
