@@ -26,12 +26,21 @@ class AutoMergeEnv:
         self.task_paths = ["tasks/task_1_easy", "tasks/task_2_medium", "tasks/task_3_hard"]
         self.current_repo = ""
 
-    async def reset(self) -> AutoMergeObservation:
+    async def reset(self, *args, **kwargs) -> AutoMergeObservation:
         self._step_count = 0
         self._closed = False
         
-        # Select a task randomly
-        self.current_repo = random.choice(self.task_paths)
+        # Look for a specific task_id passed from the inference script
+        task_id = kwargs.get("task_id")
+        
+        if task_id == "task_1_easy":
+            self.current_repo = "tasks/task_1_easy"
+        elif task_id == "task_2_medium":
+            self.current_repo = "tasks/task_2_medium"
+        elif task_id == "task_3_hard":
+            self.current_repo = "tasks/task_3_hard"
+        else:
+            self.current_repo = random.choice(self.task_paths)
         
         # Run a hard reset to ensure a clean state
         run_command(["git", "reset", "--hard"], cwd=self.current_repo)
