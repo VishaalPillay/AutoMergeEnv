@@ -1,19 +1,33 @@
 name: AutoMergeEnv
-version: 0.1.0
+version: "1.0.0"
+description: >
+  An OpenEnv environment where AI agents resolve Git merge conflicts across
+  four difficulty levels, including semantic conflicts with no visible markers
+  and adversarial conflicts where both versions are wrong.
+domain: DevOps / Software Engineering
 entrypoint: environment.env:AutoMergeEnv
 tasks:
-  - id: "task_1_easy"
-    name: "Task 1 Easy"
-    description: "Resolve an easy git merge conflict in the utils file."
-    difficulty: "easy"
-    grader: "environment.graders:calculate_reward"
-  - id: "task_2_medium"
-    name: "Task 2 Medium"
-    description: "Resolve a medium git merge conflict involving application logic."
-    difficulty: "medium"
-    grader: "environment.graders:calculate_reward"
-  - id: "task_3_hard"
-    name: "Task 3 Hard"
-    description: "Resolve a hard git merge conflict involving database schemas."
-    difficulty: "hard"
-    grader: "environment.graders:calculate_reward"
+  - id: task_1_easy
+    difficulty: easy
+    description: Textual conflict in a single file
+    grader: "environment.graders:calculate_step_reward"
+  - id: task_2_medium
+    difficulty: medium
+    description: Cross-file function signature conflict
+    grader: "environment.graders:calculate_step_reward"
+  - id: task_3_hard
+    difficulty: hard
+    description: Semantic conflict — clean merge, broken logic, no markers
+    grader: "environment.graders:calculate_step_reward"
+  - id: task_4_adversarial
+    difficulty: adversarial
+    description: Both conflicting versions are wrong — agent must infer correct implementation from tests
+    grader: "environment.graders:calculate_step_reward"
+reward_range: [0.0, 1.0]
+max_steps_per_episode: 30
+action_space: structured
+observation_space: text
+infrastructure:
+  vcpu: 2
+  memory_gb: 8
+  runtime_limit_minutes: 20

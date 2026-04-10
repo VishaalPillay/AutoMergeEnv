@@ -11,6 +11,10 @@ AllowedCommand = Literal[
     "git_status",
     "git_add",
     "commit_merge",
+    "list_files",
+    "search_code",
+    "show_diff",
+    "git_log",
 ]
 
 
@@ -27,7 +31,21 @@ class AutoMergeObservation(BaseModel):
     stderr: str
     has_unmerged_paths: bool
     tests_passing: bool
+    current_task: str = ""
+    step_count: int = 0
 
 
 class AutoMergeReward(BaseModel):
     value: float
+    breakdown: dict
+    done: bool
+    info: dict
+
+
+class AutoMergeState(BaseModel):
+    current_task: str
+    unmerged_files: list[str]
+    modified_files: list[str]
+    tests_passing: bool
+    step_count: int
+    episode_history: list[str]

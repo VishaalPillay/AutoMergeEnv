@@ -40,3 +40,4 @@ tasks/task_3_hard/*
 !tasks/task_3_hard/.gitkeep
 tasks/**/.git
 
+tasks/

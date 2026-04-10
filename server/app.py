@@ -1,23 +1,35 @@
 from __future__ import annotations
 
+from typing import Optional
+
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 from environment.env import AutoMergeEnv
 from environment.models import AutoMergeAction
 
-app = FastAPI(title="AutoMergeEnv API", version="0.1.0")
+app = FastAPI(title="AutoMergeEnv API", version="1.0.0")
 env = AutoMergeEnv()
 
 
+class ResetRequest(BaseModel):
+    task_id: Optional[str] = None
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
 @app.post("/reset")
-async def reset() -> dict:
-    observation = await env.reset()
+async def reset(request: ResetRequest = ResetRequest()):
+    observation = env.reset(task_id=request.task_id)
     return observation.model_dump()
 
 
 @app.post("/step")
 async def step(action: AutoMergeAction) -> dict:
-    result = await env.step(action)
+    result = env.step(action)
     return {
         "observation": result.observation.model_dump(),
         "reward": result.reward.model_dump(),
@@ -28,8 +40,8 @@ async def step(action: AutoMergeAction) -> dict:
 
 @app.get("/state")
 async def state() -> dict:
-    observation = await env.state()
-    return observation.model_dump()
+    s = env.state()
+    return s.model_dump()
 
 
 def main():
